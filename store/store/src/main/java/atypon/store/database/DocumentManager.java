@@ -48,6 +48,9 @@ public class DocumentManager {
             int newId = doc.getVersion() + 1;
             if (res.get("data") != null){
                 var result = storeDoc(nodeUrl, token, docId, editedDoc, doc.getVersion());
+                if(result.startsWith("File was modified by another one.")){
+                    throw new IllegalStateException("File was modified by another one.");
+                }
             }
         }
     }
